@@ -8,14 +8,12 @@ A python script that checks reddit for new posts to [/r/progether](http://www.re
 
 Installation
 ------------
-The dependencies needed are:
+The only dependency needed is:
 
- 1. praw
  1. requests
 
-You can install them with (assuming you have pip):
+You can install it with (assuming you have pip):
 
-    pip install praw
     pip install requests
 
 All you need to do to run this script is:
