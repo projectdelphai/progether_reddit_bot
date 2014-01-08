@@ -1,0 +1,1 @@
+worker: while true; do python ./progether_reddit_bot.py; sleep 14401; done;
