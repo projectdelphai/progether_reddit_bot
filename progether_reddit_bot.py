@@ -4,14 +4,14 @@ import requests
 import json
 import socket
 
+
 def shorten(url):
-    bitly_username = "projectdelphai"
-    bitly_api_key = "R_8e6bd9705f556e6c428bf0fc1835fb2e"
     api_url = "https://api-ssl.bitly.com/v3/shorten?access_token=3009c360766239e95a5d3e6ac04ac01539860bb4&longUrl=%s" % url
     r = requests.get(api_url)
     data = json.loads(r.text)
     shortened_url = data['data']['url']
     return shortened_url
+
 
 def get_latest_post():
     url = "http://www.reddit.com/r/progether/new.json"
@@ -21,8 +21,9 @@ def get_latest_post():
     title = latest['title']
     short_url = shorten(latest['url'])
     author = latest['author']
-    latest_post = "\"%s\" by %s (%s)" % (title,author,short_url)
+    latest_post = "\"%s\" by %s [ %s ]" % (title, author, short_url)
     return latest_post
+
 
 def post_to_irc(post_string):
     irc_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,5 +45,5 @@ def post_to_irc(post_string):
             string = 'PRIVMSG #reddit-progether :%s\r\n' % post_string
             irc_socket.send(string.encode("UTF-8"))
             break
-    
+
 post_to_irc(get_latest_post())
